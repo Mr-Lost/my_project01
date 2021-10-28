@@ -1,0 +1,75 @@
+---
+# markdown使用
+- 1.使用连续个 # 可依次对应表示1-6级标题。
+- 2.段落换行使用两个以上空格加回车，或中间加空行（即两个回车）。
+- 3.字体：内容两边各用1-3个* ，*斜体italic*，**粗体bold**，***斜粗体both***，* 可替换为 _。
+- 4.分隔线：单独一行使用---，***，___都可。
+- 5.删除线：内容两边各用两个~，~~错误~~。
+- 6.脚注：[^要注明的内容]，用反引号`要注明的内容`。
+- 7.列表：无序列表 *， +或 - 加一个空格 开头；有序列表 数字加. 开头；嵌套列表4个空格开头。
+- 8.区块：使用 >和一个空格 开头，使用两个>进行嵌套。
+    > 1 hello world
+    >> 2 hello
+- 9.链接：用变量来设置一个链接，在文档末尾为变量赋值，百度[Baidu][1]，谷歌[Google][google]。
+
+
+[1]:http://www.baidu.com/
+[google]:http://www.google.com/
+
+
+---
+# vue2 使用
+- 1.插值：数据绑定时常见使用`{{ }}`。使用`v-once`进行一次性绑定，当数据改变时，插值处内容不会更新。
+    > ` <div v-once>这个将不会改变{{message}}</div> `
+- 2.`v-html`：用于输出html代码。
+    > ```
+    > <div v-html='demo1'></div>
+    >
+    >  data(){
+    >    return{
+    >       demo1: '<div>Hello</div>'
+    >    }
+    >  }
+    > ```
+- 3.`v-bind`用于绑定属性，参数以冒号指明，缩写`v-bind:id`=`:id`。
+    > ```
+    > <div v-bind:class="{'class1':exam'}"></div>
+    > <div v-bind:id="'demo'+ num"></div>
+    >
+    > data(){
+    >   return{
+    >       exam: 2>1
+    >       num: 5
+    >   }
+    > }
+    > ```
+- 4.`v-if`根据值的true或false来决定是否插入DOM元素，其后可以加`v-else-if`和`v-else`。
+    > ```
+    > <div v-if="seen">看得到了</div>
+    > <div v-else-if="feel">感觉到了</div>
+    > <div v-else>没有了</div>
+    >
+    > data(){
+    >   return{
+    >       seen: false
+    >       feel: 2>1
+    >   }
+    > }
+    > ```
+- 5.`v-for`绑定数组/哈希表数据来渲染一个项目列表，可选第二个参数，即为当前项的索引/键。
+    > ```
+    > <div v-for="(t,index) in texts">{{ index }}: {{ t.text }}</div>
+    > <div v-for="(value,key) in object">{{ key }}: {{ value }}</div>
+    >
+    > data(){
+    >   return{
+    >       texts: [{text: "hello"}, {text: "hi"}, {text: "haha"}],
+    >       object: { name: "Bob", age: 20, sex: "male" }
+    >   }
+    > }
+    > ```
+- 6.`v-on`监听DOM事件，缩写`v-on:click`=`@click`。
+- 7.`v-model`用来在input,select,textarea,checkbox,radio等表单控制元素上创建双向绑定数据，`<input v-model="message">`。
+- 8.`v-show`根据条件是否展示元素，`<div v-show=false>藏着呢</div>`。
+
+<template v-for="t in texts"></template>
