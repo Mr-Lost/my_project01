@@ -4,6 +4,8 @@ import Home from '@/components/Home/Home'
 import Cart from '@/components/Cart/Cart'
 import Vip from '@/components/Vip/Vip'
 import Search from '@/components/Search/Search'
+import NewsList from "@/components/news/NewsList"
+import NewsDetail from "../components/news/NewsDetail";
 
 // 使用vue-router插件 Vue.prototype.$router = Router;
 Vue.use(Router)
@@ -34,6 +36,16 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: Search
-    }
+    },
+    {
+      path: '/news/list',
+      name: 'news_list',
+      component: NewsList
+    },
+    {
+      path: '/news/detail',
+      name: 'news_detail',
+      component: NewsDetail
+    },
   ]
 })

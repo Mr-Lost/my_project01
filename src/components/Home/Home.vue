@@ -5,6 +5,7 @@
       <mt-swipe-item v-for="(item,index) in imgs" :key="index">
         <img :src="item.img" alt=""><p>{{index}}</p>
       </mt-swipe-item>
+      <mt-swipe-item><img src="/src/assets/lunbo/lunbo3.jpg" alt=""></mt-swipe-item>
       <mt-swipe-item><img src="/static/lunbo/lunbo3.jpg" alt=""></mt-swipe-item>
     </mt-swipe>
     <div class="list">
@@ -31,6 +32,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 import src1 from '../../assets/lunbo/lunbo1.jpg'
@@ -71,23 +73,25 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
   .swiper{
     width: 100%;
     height: 250px;
     background: gray;
+    text-align: center;
   }
   .list ul{
     display: flex;
     flex-wrap: wrap;
     margin-top: 10px;
-  }
-  .list ul li{
-    height: 150px;
-    width: 33%;
-  }
-  .list ul li img{
-    width: 100px;
-    height: 100px
+    li{
+      height: 150px;
+      width: 33%;
+      text-align: center;
+      img{
+        width: 100px;
+        height: 100px
+      }
+    }
   }
 </style>

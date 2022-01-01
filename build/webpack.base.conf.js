@@ -32,6 +32,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(sass|scss)$/,
+        // loaders: ['style', 'css', 'sass']
+        loader: 'sass-loader!style-loader!css-loader'
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig

@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 import Mint from 'mint-ui'
 Vue.use(Mint)
 import 'mint-ui/lib/style.min.css'
-import '../static/css/main.css'
+import './assets/css/main.css'
 
 // 配置公共的URL
 // Axios.defaults.baseURL = 'http://www.sinya.online/api/';
