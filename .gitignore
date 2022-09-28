@@ -19,3 +19,8 @@ node_modules/
 .editorconfig
 package-lock.json
 .postcssrc.js
+CaoGao.py
+chromedriver.exe
+
+/static/
+!/static/main/

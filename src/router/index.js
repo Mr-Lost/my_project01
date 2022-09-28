@@ -6,6 +6,10 @@ import Vip from '@/components/Vip/Vip'
 import Search from '@/components/Search/Search'
 import NewsList from "@/components/news/NewsList"
 import NewsDetail from "../components/news/NewsDetail";
+import Photos from "../components/photos/Photos";
+import PhotoDetail from "../components/photos/PhotoDetail";
+import goodsList from "../components/goods/goodsList";
+import goodsDetail from "../components/goods/goodsDetail";
 
 // 使用vue-router插件 Vue.prototype.$router = Router;
 Vue.use(Router)
@@ -43,9 +47,29 @@ export default new Router({
       component: NewsList
     },
     {
-      path: '/news/detail',
+      path: '/news/detail/:nid',
       name: 'news_detail',
       component: NewsDetail
     },
+    {
+      path: '/photos/:cid',
+      name: 'photos',
+      component: Photos,
+    },
+    {
+      path: '/photos/detail/:pid',
+      name: 'photo_detail',
+      component: PhotoDetail
+    },
+    {
+      path: '/goods',
+      name: 'goods',
+      component: goodsList
+    },
+    {
+      path: '/goods/detail/:gid',
+      name: 'goods_detail',
+      component: goodsDetail
+    }
   ]
 })

@@ -1,19 +1,17 @@
 <template>
-<div class="news">
-  <div class="newList">
-    <ul>
+  <div id="news">
+    <Navbar title="新闻列表"/>
+    <ul class="newList">
       <li v-for="(news,index) in newsList" :key="index">
-        <router-link :to="news.router">
-          <div class="new_img">
-            <img :src="news.src" alt="">
-          </div>
+        <router-link :to="{name: 'news_detail', params: {nid: news.id}}">
+          <img class="new_img" :src="news.avatar" alt="">
           <div class="content">
-            <p class="title">{{news.title}}</p>
+            <h4>{{news.title}}</h4>
             <div class="news-desc">
-              <p class="summary">{{news.summary}}</p>
-              <p>
-                <span class="praise">点赞数：{{news.praise}}</span>
-                <span class="time">发表时间：{{news.time}}</span>
+              <p class="summary">{{news.description}}</p>
+              <p class="news-vice">
+                <span class="praise">点击量：{{news.clicked}}</span>
+                <span class="time">发表时间：{{news.published | convertTime('YYYY.MM.DD')}}</span>
               </p>
             </div>
           </div>
@@ -21,69 +19,73 @@
       </li>
     </ul>
   </div>
-</div>
 </template>
 
 <script>
-    import src1 from '../../assets/news/news.jpg'
     export default {
-        name: "NewsList",
-        data(){
-          return {
-            newsList: [
-              {title: '我爱你中国', src: src1, summary: '我的摘要信息', praise: '23456', time: '2021-12-23', router: {name: 'news_detail'}},
-              {title: '我爱你中国', src: src1, summary: '我的摘要信息', praise: '23456', time: '2021-12-23', router: {name: 'news_detail'}},
-              {title: '我爱你中国', src: src1, summary: '我的摘要信息', praise: '23456', time: '2021-12-23', router: {name: 'news_detail'}},
-              {title: '我爱你中国', src: src1, summary: '我的摘要信息', praise: '23456', time: '2021-12-23', router: {name: 'news_detail'}},
-              {title: '我爱你中国', src: src1, summary: '我的摘要信息', praise: '23456', time: '2021-12-23', router: {name: 'news_detail'}},
-              {title: '我爱你中国', src: src1, summary: '我的摘要信息', praise: '23456', time: '2021-12-23', router: {name: 'news_detail'}}
-            ]
-          }
+      name: "NewsList",
+      data(){
+        return {
+          newsList: ''
         }
+      },
+      created() {
+        this.$axios.get('/api/news_list')
+        .then(res=>{
+          this.newsList = res.data
+        })
+        .catch(err=>{
+          console.log('新闻列表获取失败', err)
+        })
+      }
     }
 </script>
 
 <style lang="scss" scoped>
   .newList{
-    width: 100%;
-    border-bottom: 1px solid #cccccc;
-    font-size: 12px;
-    ul li{
-      height: 100px;
-      position: relative;
-      background-color: gray;
-      margin-bottom: 5px;
-      :last-child{
+    padding-top: 40px;
+    li{
+      width: 100%;
+      padding: 5px;
+      height: 150px;
+      background-color: rgba(1,1,1,0.2);
+      margin-bottom: 10px;
+      &:last-child{
         margin-bottom: 0;
       }
       a{
-        display: block;
         width: 100%;
         height: 100%;
+        display: flex;
+        img{
+          width: 30%;
+          height: 80%;
+          margin: auto;
+          background-size: cover;
+        }
+        .content{
+          width: 70%;
+          padding: 10px;
+          position: relative;
+          h4{
+            color: black;
+          }
+          .news-desc{
+            color: rgba(205, 29, 29, 0.8);
+            font-size: 14px;
+            .summary{
+              padding-top: 10px;
+            }
+            .news-vice{
+              position: absolute;
+              width: 90%;
+              bottom: 10px;
+              display: flex;
+              justify-content: space-between;
+            }
+          }
+        }
       }
     }
-  }
-  .new_img{
-    height: 100%;
-    width: 150px;
-    background-color: red;
-    float: left;
-  }
-  .content .title{
-    font-size: 15px;
-    display: inline-block;
-    color: #131f3c;
-    letter-spacing: 0;
-    padding-bottom: 7px;
-    margin-top: 10px;
-  }
-  .content .news-desc{
-    color: #ff6700;
-  }
-  .summary{
-    padding: 5px 0;
-  }
-  .time{
-    margin-left: 30px;
   }
 </style>
