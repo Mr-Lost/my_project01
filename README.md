@@ -1,6 +1,6 @@
 # cms_pro
 
-> A Vue.js project
+> A multi-integrated Vue project based on some hot mobile apps.
 
 ## Build Setup
 
