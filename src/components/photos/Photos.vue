@@ -4,7 +4,7 @@
     <div class="photo-wrapper">
       <ul id="plist" class="photo-list">
         <li v-for="(cat, index) in catList" :key="index">
-          <a :class="{acctive:index===currentCat}" :to="{name: 'photos', params: {cid: cat.id}}"  @click="categoryHandler(cat.id, index)">
+          <a :class="{active:index===currentCat}" :to="{name: 'photos', params: {cid: cat.id}}"  @click="categoryHandler(cat.id, index)">
             {{cat.catname}}
           </a>
         </li>
@@ -52,6 +52,10 @@
             console.log('图文详情获取失败', err)
           })
         },
+        load_all(id){
+          this.load_photos(id)
+          this.load_categories()
+        },
         // 路由切换
         categoryHandler(id, index){
           this.$router.push({name:'photos', params:{cid: id}})
@@ -61,18 +65,14 @@
       // 动态路由跳转时更新数据，重新渲染页面
       beforeRouteUpdate(to, from, next){
         this.load_photos(to.params.cid)
-        console.log('beforeRouteUpdate')
         next()
       },
       created() {
         this.currentCat = this.$route.params.cid
-        this.$axios.all([this.load_categories(), this.load_photos(this.currentCat)])
-        console.log('created')
+        this.load_all(this.currentCat)
       },
       updated() {
-        this.currentCat = this.$route.params.cid
         let temp = document.querySelectorAll('#plist>li>a')
-        console.log('updated', this.currentCat, this.photoList.length)
         for(let i=0; i<temp.length; i++){
           temp[i].classList.remove('active')
         }

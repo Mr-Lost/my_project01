@@ -68,7 +68,7 @@ router.post('/photos_list', (req, res) => {
   const params = req.body.id
   if (params === 0) {
     const sql0 = $sql.photos.hot
-    conn.query(sql0, function (err, result) {
+    conn.query(sql0, [0, 10], function (err, result) {
       if (err) {
         console.log('图文详情异常', err)
       }

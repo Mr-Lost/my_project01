@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home/Home'
-import Cart from '@/components/Cart/Cart'
-import Vip from '@/components/Vip/Vip'
-import Search from '@/components/Search/Search'
+import Cart from '@/components/Cart/Cart';
+import Vip from '@/components/Vip/Vip';
+import Search from '@/components/Search/Search';
 import NewsList from "@/components/news/NewsList"
 import NewsDetail from "../components/news/NewsDetail";
 import Photos from "../components/photos/Photos";
@@ -42,32 +42,32 @@ export default new Router({
       component: Search
     },
     {
-      path: '/news/list',
+      path: '/home/news/list',
       name: 'news_list',
       component: NewsList
     },
     {
-      path: '/news/detail/:nid',
+      path: '/home/news/detail/:nid',
       name: 'news_detail',
       component: NewsDetail
     },
     {
-      path: '/photos/:cid',
+      path: '/home/photos/:cid',
       name: 'photos',
       component: Photos,
     },
     {
-      path: '/photos/detail/:pid',
+      path: '/home/photos/detail/:pid',
       name: 'photo_detail',
       component: PhotoDetail
     },
     {
-      path: '/goods',
+      path: '/home/goods',
       name: 'goods',
       component: goodsList
     },
     {
-      path: '/goods/detail/:gid',
+      path: '/home/goods/detail/:gid',
       name: 'goods_detail',
       component: goodsDetail
     }

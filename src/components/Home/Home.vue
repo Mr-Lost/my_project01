@@ -61,12 +61,14 @@ export default {
 <style lang="scss" scoped>
   .swiper{
     width: 100%;
-    height: 280px;
-    background: gray;
+    height: 20vh;
+    min-height: 210px;
     text-align: center;
   }
   .swiper .mint-swipe-items-wrap .mint-swipe-item img{
-    width: 100%;
+    width: 100vw;
+    height: 210px;
+    max-width: 444px;
   }
   .list ul{
     display: flex;

@@ -2,15 +2,17 @@
   <div id="app">
     <!--顶部导航栏-->
     <mt-header fixed title="标题过长会隐藏后面的内容啊哈哈哈哈">
-      <router-link v-if="this.selected!=='home'" to="/" slot="left">
-        <mt-button icon="back">首页</mt-button>
-      </router-link>
+      <template v-if="this.$route.path.split('/').length>2">
+        <mt-button icon="back" @click="goBack" slot="left"></mt-button>
+        <mt-button slot="left" id="go-home" @click="goHome">首页</mt-button>
+      </template>
+      <mt-button id="go-top" slot="right" @click="goTop">顶部</mt-button>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
 
     <!--路由组件出口-->
     <transition name="fade" mode="out-in">
-          <router-view/>
+          <router-view />
     </transition>
 
     <!--底部栏-->
@@ -44,7 +46,7 @@ export default {
   },
   watch: {
     selected: function () {
-      if (this.selected !== this.$route.path.split('/').pop()) {
+      if (this.selected !== this.$route.path.split('/')[1]) {
         this.$router.push({name:this.selected});
       }
     }
@@ -54,22 +56,60 @@ export default {
       return this.$store.getters.getCartNum
     }
   },
+  methods: {
+    goBack(){
+      this.$router.go(-1)
+    },
+    goHome(){
+      this.$router.push({name: 'home'})
+    },
+    goTop(){
+      window.scrollTo({top: 0, behavior: "smooth"})
+    }
+  },
   created() {
-    this.selected = this.$route.path.split('/').pop()
+    this.selected = this.$route.path.split('/')[1]
     this.$store.commit('changeCartNum', this.$myGoods.getTotal())
     // this.$bus.$on('addToCart', (data)=>{
     //   this.cartNum += data
     // })
   },
+  mounted() {
+    // 刚进入或刚退回或刷新页面时，判断回顶部按钮是否显示
+    if(scrollY < innerHeight){
+      document.getElementById('go-top').style.display = 'none'
+    }
+    // 监听垂直方向上的滚动距离，判断回顶部按钮是否显示
+    window.addEventListener('scroll', function () {
+      if(scrollY > innerHeight){
+        document.getElementById('go-top').style.display = 'inline-block'
+      } else {
+        document.getElementById('go-top').style.display = 'none'
+      }
+    })
+  },
   updated() {
-    this.selected = this.$route.path.split('/').pop()
+    this.selected = this.$route.path.split('/')[1]
   }
 }
 </script>
+
 <style scoped lang="scss">
+  body{
+    animation: .5s;
+  }
+  #go-home{
+    margin-left: 10px;
+  }
+  #go-top{
+    margin-right: 10px;
+  }
+  .mint-tab-item{
+    position: relative;
+  }
   .mint-badge{
     position: absolute;
-    right: 160px;
+    left: calc(50% - 30px);
     top: 2px;
   }
   .fade-enter-active, .fade-leave-active{

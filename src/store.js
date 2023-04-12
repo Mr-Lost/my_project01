@@ -10,7 +10,8 @@ export default new Vuex.Store({
   getters: {
     getCartNum(state){
       return state.cartNum
-    }
+    },
+    tt: ()=>{return 'abc'}
   },
   mutations: {
     addCartNum(state, num){

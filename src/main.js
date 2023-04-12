@@ -68,6 +68,20 @@ Vue.filter('convertTime', function (data, formatStr) {
 Vue.filter('relativeTime', function (data) {
   return Moment(data).fromNow()
 })
+Vue.filter('convertNum', function (data) {
+  let temp
+  if(data>=10**9){
+    temp = data/(10**9)
+    return temp.toFixed(1) + '亿'
+  }
+  if(data>=10**5){
+    temp = data/(10**5)
+    return temp.toFixed(1) + '万'
+  }
+  else{
+    return data + ''
+  }
+})
 
 import eventBus from "./eventBus";
 Vue.prototype.$bus = eventBus
@@ -76,6 +90,12 @@ import myGoods from "./goodsTool";
 Vue.prototype.$myGoods = myGoods
 
 import store from "./store";
+
+Vue.directive('test', {
+  inserted: function(a, b, c){
+    console.log(a, b, c)
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

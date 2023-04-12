@@ -10,7 +10,7 @@ var sqlMap = {
   photos: {
     category: 'select id, catname from photos_category',
     list: 'select id, category, src, description from photos where category=?',
-    hot: 'select id, src, description, updated from photos order by updated desc'
+    hot: 'select id, src, description, updated from photos order by updated desc limit ?,?'
   },
   photo: {
     images: 'select pid, bigpic, smallpic from photo_pictures where pid=?',
